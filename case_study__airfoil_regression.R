@@ -1,18 +1,27 @@
-# library(dplyr)
-# library(caret)
-# library(ggplot2)
-
 # Setting Seed
 set.seed(2806)
 
-libs()
+# libs() # used the custom libs function to import libraries more conveniently
+
+# Importing Libraries
+library(RColorBrewer)
+library(dplyr)
+library(ggplot2)
+library(corrplot)
+library(rattle)
+library(caret)
+library(maptree)
+library(randomForest)
 
 # Importing Data
 airfoil <- read.csv("airfoil_self_noise.csv", 
                     col.names = c("Freq", "Angle", "Chord", "Velocity", "Thick", "Pres"))
 
 # Data Understanding
-summ(airfoil)
+# summ(airfoil) # another custon function to easily get the main summaries
+head(dataset)
+summary(dataset)
+str(dataset)
 
 # EDA
 # Test for multicollinearity using a correlation plot
@@ -222,7 +231,7 @@ predictions <- predict(mod_rf, data = training[, -6])
 rmse_mod_rf <- RMSE(predictions, training$Pres)
 rmse_mod_rf
 
-# let's now get RMSE for all the above linear models as well and then compare with this model to see if it has decreased in the case of Deision Trees.
+# let's now get RMSE for all the above linear models as well and then compare with the two CART models to see if it has decreased in the case of Deision Trees.
 
 rmse_mod_base <- RMSE(pred = predict(mod_base, data = training), obs = training$Pres)
 
